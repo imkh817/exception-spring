@@ -1,37 +1,40 @@
 package home.exception;
 
-import org.springframework.boot.web.server.ConfigurableWebServerFactory;
-import org.springframework.boot.web.server.ErrorPage;
-import org.springframework.boot.web.server.WebServerFactoryCustomizer;
-import org.springframework.http.HttpStatus;
+import home.exception.filter.LogFilter;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-// 서블릿 오류 페이지 등록
-@Component
-public class WebConfig implements WebServerFactoryCustomizer<ConfigurableWebServerFactory> {
+import javax.servlet.DispatcherType;
+import javax.servlet.Filter;
+
+@Configuration
+public class WebConfig implements WebMvcConfigurer {
+
     /**
-    WebServerFactoryCustomizer 인터페이스는 내장된 웹 서버를 커스터마이징하기 위해 사용된다.
-    스프링 부트는 내장된 웹 서버를 사용하여 애플리케이션을 실행할 수 있으며,
-    WebServerFactoryCustomizer를 통해 이 웹 서버의 구성을 조정할 수 있다.
-
-    public interface WebServerFactoryCustomizer<T extends ConfigurableWebServerFactory> {
-        void customize(T factory);
-    }
-    여기서 T는 ConfigurableWebServerFactory를 구현한 구체적인 내장 웹 서버 팩토리 클래스를 나타낸다.
-    이 팩토리는 내장된 웹 서버의 구성을 다루는 데 사용됩니다.
-    **/
-    @Override
-    public void customize(ConfigurableWebServerFactory factory) {
-        /**
-         * 에러페이지 생성-> 해당하는 에러발생시 정해준 path로 이동
-         */
-        ErrorPage errorPage404 = new ErrorPage(HttpStatus.NOT_FOUND,"/error-page/page404");
-        ErrorPage errorPage500 = new ErrorPage(HttpStatus.INTERNAL_SERVER_ERROR,"/error-page/page500");
-        ErrorPage errorPageEx = new ErrorPage(RuntimeException.class,"/error-page/page500");
+     * FilterRegistrationBean<T>는 스프링 부트에서 제공하는 클래스로, 서블릿 필터를 등록하고 구성하기 위한 도우미 클래스이다.
+     * 클래스를 사용하면 서블릿 필터의 등록 순서, URL 패턴, 초기 매개변수 및 기타 속성들을 조정할 수 있다.
+     *
+     * FilterRegistrationBean<T>에서 T는 등록하려는 필터의 타입을 나타낸다.
+     * 여기서 T는 Filter 인터페이스를 구현한 구체적인 필터 클래스입니다.
+     */
+    @Bean
+    public FilterRegistrationBean logFilter(){
+        FilterRegistrationBean<Filter> filterRegistrationBean = new FilterRegistrationBean<>();
+        filterRegistrationBean.setFilter(new LogFilter());
+        filterRegistrationBean.setOrder(1);
+        filterRegistrationBean.addUrlPatterns("/*");
+        filterRegistrationBean.setDispatcherTypes(DispatcherType.REQUEST,DispatcherType.ERROR);
+        return filterRegistrationBean;
 
         /**
-         *  customize 메서드를 사용하여 내장된 웹 서버 팩토리의 에러 페이지를 설정
+         * filterRegistrationBean.setDispatcherTypes(DispatcherType.REQUEST,DispatcherType.ERROR);
+         * 이렇게 두 가지를 모두 넣으면 클라이언트 요청은 물론이고, 오류 페이지 요청에서도 필터가 호출된다.
+         * 아무것도 넣지 않으면 기본 값이 `DispatcherType.REQUEST` 이다. 즉 클라이언트의 요청이 있는 경우에만 필터가 적용된다.
+         * 특별히 오류 페이지 경로도 필터를 적용할 것이 아니면, 기본 값을 그대로 사용하면 된다.
+         * 물론 오류 페이지 요청 전용 필터를 적용하고 싶으면 `DispatcherType.ERROR` 만 지정하면 된다.
          */
-        factory.addErrorPages(errorPage404,errorPage500,errorPageEx);
     }
 }
