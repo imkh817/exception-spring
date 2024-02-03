@@ -2,6 +2,7 @@ package home.exception;
 
 import home.exception.filter.LogFilter;
 import home.exception.interceptor.LogInterceptor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
