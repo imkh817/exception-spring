@@ -1,14 +1,14 @@
-API 예외 처리는 어떻게 해야할까?<br>
+## API 예외 처리는 어떻게 해야할까 ❓<br>
 HTML 페이지의 경우 지금까지 설명했던 것 처럼 4xx, 5xx와 같은 오류 페이지만 있으면 대부분의 문제를 해결할 수 있다.<br>
 그런데 API의 경우에는 생각할 내용이 더 많다. 오류 페이지는 단순히 고객에게 오류 화면을 보여주고 끝이지만, API는 각 오류 상황에 맞는 오류 응답 스펙을 정하고, JSON으로 데이터를 내려주어야 한다.<br>
 지금부터 API의 경우 어떻게 예외 처리를 하면 좋은지 알아보자.<br>
 API도 오류 페이지에서 설명했던 것 처럼 처음으로 돌아가서 서블릿 오류 페이지 방식을 사용해보자.<br>
 
-**WebServerCustomizer 다시 동작**
+**WebServerCustomizer 다시 동작** <br>
 [WebServerCustomizer](https://github.com/imkh817/exception-spring/blob/master/src/main/java/home/exception/WebServerCustomizer.java)
 
-**API Exception Controller**
-[API Exception Controller]()
+**API Exception Controller** <br>
+[API Exception Controller](https://github.com/imkh817/exception-spring/blob/master/src/main/java/home/exception/api/ApiExceptionController.java)
 
 단순히 회원을 조회하는 기능을 하나 만들었고, 예외 테스트를 위해 URL에 전달된 `id` 의 값이 `ex` 이면 예외가 발생하도록 코드를 작성하였다.<br>
 ### Postman으로 테스트 👨🏻‍💻
@@ -44,7 +44,7 @@ API도 오류 페이지에서 설명했던 것 처럼 처음으로 돌아가서 
 웹 브라우저가 아닌 이상 HTML을 직접 받아서 할 수 있는 것은 별로 없기 때문이다. <br>
 문제를 해결하려면 오류 페이지 컨트롤러도 JSON 응답을 할 수 있도록 수정해야 한다. <br>**
 
-[ErrorPageController - API 응답 추가]()
+[ErrorController - API 응답 추가](https://github.com/imkh817/exception-spring/blob/master/src/main/java/home/exception/ErrorController.java)
 
 `produces = MediaType.APPLICATION_JSON_VALUE` 의 뜻은 클라이언트가 요청하는 HTTP Header의
 `Accept` 의 값이 `application/json` 일때 해당 메서드가 호출된다는 것이다. <br>
