@@ -63,7 +63,7 @@ public interface HandlerExceptionResolver {
 }
 ```
 **MyHandlerExceptionResolver** <br>
-[MyHandlerExceptionResolver]()
+[MyHandlerExceptionResolver](https://github.com/imkh817/exception-spring/blob/master/src/main/java/home/exception/resolver/MyHandlerExceptionResolver.java)
 
 `ExceptionResolver` 가 `ModelAndView` 를 반환하는 이유는 마치 try, catch를 하듯이, `Exception` 을 처리해서 정상 흐름 처럼 변경하는 것이 목적이다. <br>
 이름 그대로 `Exception` 을 Resolver(해결)하는 것이 목적이다.<br>
