@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 // 서블릿 오류 페이지 등록
-@Component
+//@Component
 public class WebServerCustomizer implements WebServerFactoryCustomizer<ConfigurableWebServerFactory> {
     /**
     WebServerFactoryCustomizer 인터페이스는 내장된 웹 서버를 커스터마이징하기 위해 사용된다.
