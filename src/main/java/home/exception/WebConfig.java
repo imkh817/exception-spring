@@ -3,6 +3,7 @@ package home.exception;
 import home.exception.filter.LogFilter;
 import home.exception.interceptor.LogInterceptor;
 import home.exception.resolver.MyHandlerExceptionResolver;
+import home.exception.resolver.UserHandlerExceptionResolver;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -22,6 +23,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void extendHandlerExceptionResolvers(List<HandlerExceptionResolver> resolvers) {
         resolvers.add(new MyHandlerExceptionResolver());
+        resolvers.add(new UserHandlerExceptionResolver());
     }
 
     @Override
