@@ -2,7 +2,7 @@
 `HandlerExceptionResolverComposite` 에 다음 순서로 등록 <br>
 1. `ExceptionHandlerExceptionResolver`
 2. `ResponseStatusExceptionResolver`
-3. `DefaultHandlerExceptionResolver` -> 우선순위가가장낮다. <br>
+3. `DefaultHandlerExceptionResolver` -> 우선순위가가장낮다. <br> 
 
 **ExceptionHandlerExceptionResolver** <br>
 `@ExceptionHandler` 을 처리한다. API 예외 처리는 대부분 이 기능으로 해결한다.<br><br>
