@@ -74,7 +74,7 @@ http://localhost:8080/api/response-status-ex1
 
 **ApiExceptionController - 추가** <br>
 [ApiExceptionController](https://github.com/imkh817/exception-spring/blob/master/src/main/java/home/exception/api/ApiExceptionController.java)<br>
-Postman 실행
+**Postman 실행👨🏻‍💻**<br>
 http://localhost:8080/api/response-status-ex2
 ```json
 {
