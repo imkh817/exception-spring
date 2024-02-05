@@ -48,11 +48,11 @@ http://localhost:8080/api/response-status-ex1
 **메시지 기능** <br>
 `reason` 을 `MessageSource` 에서 찾는 기능도 제공한다. `reason = "error.bad"`<br>
 **BadRequestException - 수정**<br>
-[BadRequestException](https://github.com/imkh817/exception-spring/blob/master/src/main/java/home/exception/exception/BadRequestException.java)
+[BadRequestException](https://github.com/imkh817/exception-spring/blob/master/src/main/java/home/exception/exception/BadRequestException.java)<br>
 **messages.properties - 추가**<br>
-[messages.properties](https://github.com/imkh817/exception-spring/blob/master/src/main/resources/messages.properties)
+[messages.properties](https://github.com/imkh817/exception-spring/blob/master/src/main/resources/messages.properties)<br>
 **application.properties - 추가**<br>
-[messages.properties](https://github.com/imkh817/exception-spring/blob/master/src/main/resources/application.properties)
+[messages.properties](https://github.com/imkh817/exception-spring/blob/master/src/main/resources/application.properties)<br>
 
 Postman 실행
 http://localhost:8080/api/response-status-ex1
@@ -73,7 +73,7 @@ http://localhost:8080/api/response-status-ex1
 이때는`ResponseStatusException` 예외를 사용하면 된다.<br>
 
 **ApiExceptionController - 추가** <br>
-[ApiExceptionController](https://github.com/imkh817/exception-spring/blob/master/src/main/java/home/exception/api/ApiExceptionController.java)
+[ApiExceptionController](https://github.com/imkh817/exception-spring/blob/master/src/main/java/home/exception/api/ApiExceptionController.java)<br>
 Postman 실행
 http://localhost:8080/api/response-status-ex2
 ```json
