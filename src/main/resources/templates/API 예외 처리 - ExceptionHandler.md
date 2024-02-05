@@ -6,7 +6,7 @@ API 오류 응답의 경우 `response` 에 직접 데이터를 넣어야해서 �
 ***
 # @ExceptionHandler
 
-**HTML 화면 오류 vs API 오류** <br>
+### HTML 화면 오류 vs API 오류
 웹 브라우저에 HTML 화면을 제공할 때는 오류가 발생하면 `BasicErrorController` 를 사용하는게 편하다. <br>
 이때는 단순히 5xx, 4xx 관련된 오류 화면을 보여주면 된다. `BasicErrorController` 는 이런 메커니즘이 모두 구현해되어있다.<br>
 그런데 API는 각 시스템 마다 응답의 모양도 다르고, 스펙도 모두 다르다. <br>
@@ -16,14 +16,14 @@ API 오류 응답의 경우 `response` 에 직접 데이터를 넣어야해서 �
 결국 지금까지 살펴본 `BasicErrorController` 를 사용하거나 `HandlerExceptionResolver` 를 직접 구현하는 방식으로 API 예외를 다루기는 쉽지 않다.<br>
 
 
-**API 예외처리를 할 떄 어려웠던 점** <br>
+### API 예외처리를 할 떄 어려웠던 점
 - `HandlerExceptionResolver` 를 떠올려 보면 `ModelAndView` 를 반환해야 했다. 이것은 API 응답에는 필요하지 않다.
 - API 응답을 위해서 `HttpServletResponse` 에 직접 응답 데이터를 넣어주었다.
   - 스프링 컨트롤러에 비유하면 마치 과거 서블릿을 사용하던 시절로 돌아간 것 같다.
 - 특정 컨트롤러에서만 발생하는 예외를 별도로 처리하기 어렵다. 
   - 예를 들어서 회원을 처리하는 컨트롤러에서 발생하는 `RuntimeException` 예외와 상품을 관리하는 컨트롤러에서 발생하는 동일한 `RuntimeException` 예외를 서로 다른 방식으로 처리하고 싶다면 어떻게 해야할까?
 
-**@ExceptionHandler**<br>
+### @ExceptionHandler 
 스프링은 API 예외 처리 문제를 해결하기 위해 `@ExceptionHandler` 라는 애노테이션을 사용하는 매우 편리한 예외 처리 기능을 제공하는데, 이것이 바로 `ExceptionHandlerExceptionResolver` 이다. <br>
 스프링은 `ExceptionHandlerExceptionResolver` 를 기본으로 제공하고, 기본으로 제공하는 `ExceptionResolver` 중에 [우선순위](https://github.com/imkh817/exception-spring/blob/master/src/main/resources/templates/스프링이%20제공하는%20ExceptionResolver%20우선%20순위.md)도 가장 높다.
 ***
@@ -35,12 +35,12 @@ API 오류 응답의 경우 `response` 에 직접 데이터를 넣어야해서 �
 예외를 발생시킬 Controller도 하나 만들자!<br>
 [ApiExceptionControllerV2](https://github.com/imkh817/exception-spring/blob/master/src/main/java/home/exception/api/ApiExceptionControllerV2.java)
 
-**@ExceptionHandler 예외 처리 방법** <br>
+### @ExceptionHandler 예외 처리 방법
 `@ExceptionHandler` 애노테이션을 선언하고, 해당 컨트롤러에서 처리하고 싶은 예외를 지정해주면 된다. <br>
 해당 컨트롤러에서 예외가 발생하면 이 메서드가 호출된다. 참고로 지정한 예외 또는 그 예외의 자식 클래스는 모두 잡을 수 있다.<br>
 
 
-**다양한 예외** <br>
+### 다양한 예외
 다음과 같이 다양한 예외를 한번에 처리할 수 있다.<br>
 ```java
  @ExceptionHandler({AException.class, BException.class})
@@ -48,7 +48,7 @@ API 오류 응답의 경우 `response` 에 직접 데이터를 넣어야해서 �
      log.info("exception e", e);
  }
 ```
-**예외 생략**<br>
+### 예외 생략
 `@ExceptionHandler` 에 예외를 생략할 수 있다. 생략하면 메서드 파라미터의 예외가 지정된다.<br>
 ```java
  @ExceptionHandler
@@ -56,7 +56,7 @@ API 오류 응답의 경우 `response` 에 직접 데이터를 넣어야해서 �
 ```
 
 ### Postman 실행 👨🏻‍💻
-**Postman 실행** 
+**Postman 실행** <br>
 http://localhost:8080/api2/members/bad <br>
 **IllegalArgumentException 처리** 
 ```java
