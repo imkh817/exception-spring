@@ -52,7 +52,7 @@ http://localhost:8080/api/response-status-ex1
 **messages.properties - 추가**<br>
 [messages.properties](https://github.com/imkh817/exception-spring/blob/master/src/main/resources/messages.properties)<br>
 **application.properties - 추가**<br>
-[messages.properties](https://github.com/imkh817/exception-spring/blob/master/src/main/resources/application.properties)<br>
+[application.properties](https://github.com/imkh817/exception-spring/blob/master/src/main/resources/application.properties)<br>
 
 Postman 실행
 http://localhost:8080/api/response-status-ex1
